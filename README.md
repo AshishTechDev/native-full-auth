@@ -1,50 +1,39 @@
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+React Native Auth Flow with Node.js, MongoDB, and JWT
+1. Overview
+This guide explains how to implement a full authentication flow using React Native on the frontend and
+Node.js, MongoDB, and JWT on the backend. Users can register, login, stay logged in across sessions, and
+logout.
+2. Backend Setup (Node.js + MongoDB)
+- Install packages: express, mongoose, bcryptjs, cors, dotenv, jsonwebtoken
+- Created user schema and REST endpoints for /register and /login
+- Register hashes password and stores in MongoDB
+- Login verifies credentials and returns a JWT token
+3. Frontend Setup (React Native)
+- Built screens: LoginScreen, RegisterScreen, HomeScreen, ProfileScreen
+- Used React Navigation for routing
+- AuthContext handles login, logout, register, and token persistence with AsyncStorage
+- Used useContext to access auth globally
+- AsyncStorage used to store JWT securely
+- Root.js decides which screen stack to show based on login status
+4. Key Concepts & Definitions
+- useState: React Hook that lets you add state to function components.
+- useEffect: Hook for running side effects like fetching data or checking login status when the component
+mounts.
+- useContext: Allows consuming data from a React context like AuthContext.
+- AsyncStorage: Local storage system for React Native to persist data.
+- JWT (JSON Web Token): A secure way to transmit information between parties as a JSON object. Used
+here to authenticate users.
+- AuthContext: A React Context that provides and manages authentication state and functions across the
+app.
+- NavigationContainer & Stack.Navigator: From React Navigation, they provide routing and screen transitions
+React Native Auth Flow with Node.js, MongoDB, and JWT
+based on auth state.
+5. Flow Summary
+1. User registers -> credentials are hashed and saved to MongoDB
+2. User logs in -> password is checked, JWT is returned
+3. JWT is saved in AsyncStorage and used to determine if user is logged in
+4. Protected screens (Home/Profile) are shown only if token exists
+5. Logout removes token and returns to login/register screen
+6. Conclusion
+You now have a secure and scalable authentication flow using React Native and Node.js backend. This
+structure can be extended to include profile data, token verification on protected routes, password reset, et
